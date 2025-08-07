@@ -1,11 +1,18 @@
 import recipes from './components/recipes.jsx'
 import { useState, useEffect } from 'react'
+import SavorlyLogo from './assets/Savorly.png'
+import Quiz from './Quiz.jsx'
 
 
 function App() {
+  const [box,setBox]= useState([false, false, false, false, false, false, false])
+  const [checked,isChecked]=useState(false)
   const [data, setData] = useState([])
   const [newItem, setNewItem] = useState({ id: '', name: '', description: '', price: '', message: '' })
   const [editingItem, setEditingItem] = useState(null)
+
+  
+
   // Use RAILWAY_API_URL environment variable for Railway deployment  
   const API_URL = import.meta.env.VITE_RAILWAY_API_URL || 'http://localhost:3001'
 
@@ -115,23 +122,55 @@ function App() {
 
   return (
   <div>
-    <div className="justify-self-auto py-7 bg-orange-100">
-        <img className= "  h-16 "src="https://upload.wikimedia.org/wikipedia/commons/6/61/Book-icon-orange.png"/>
-          <h3 className=" text-xl" > Home </h3>
-          <h3 className=" text-xl"> Services </h3>
-          <h3 className=" text-xl"> Library </h3>
-
+    <div className="flex justify-between bg-slate-400">
+        <img className= "h-18 pl-5 "src={SavorlyLogo}/>
+          <div className="flex space-x-10 mr-15 py-4"><h3 className=" text-xl" > Home </h3>
+            <h3 className=" text-xl">  Library </h3>
+            <h3 className=" text-xl"> + Add Recipe </h3>
+            <h3 className=" text-xl"> Profile </h3>
+            <h3  className=" text-xl"> Quiz </h3>
+          </div>
     </div>
-    <div className=" mx-80 ">
-      <h1 className="text-3xl">Welcome to Savorly</h1>
+    
+    <div className="">
+      <h1 className="text-3xl content-center">Welcome to Savorly</h1>
       <p>Your Personal Space for Saving and Organizing Recipes</p>
+    </div>
+    
+    <div className="text-3xl mx-7 bg-[]">
+      <form>
+        
+        <input className="w-6 h-6" type="checkbox" id="Dairy" checked={isChecked} />
+        <label for="Dairy"> Dairy-Free</label> <br></br> 
+        
+         <input  className="w-5 h-5" type="checkbox" id="Shellfish"/>
+        <label for="Shellfish"> Shellfish</label> <br></br>
+        
+         <input  className="w-5 h-5" type="checkbox" id="Nuts"/>
+        <label for="Nuts"> Nuts</label> <br></br>
+        
+         <input  className="w-5 h-5" type="checkbox" id="Gluten"/>
+        <label for="Gluten"> Gluten-Free</label> <br></br>
+        
+         <input  className="w-5 h-5" type="checkbox" id="Vegetarian"/>
+        <label for="Vegetarian"> Vegetarian</label> <br></br>
+        
+         <input  className="w-5 h-5" type="checkbox" id="Vegan"/>
+        <label for="Vegan"> Vegan</label> <br></br>
+        
+         <input  className="w-5 h-5" type="checkbox" id="Halal"/>
+        <label for="Halal"> Halal</label> <br></br>
+    
+
+        <input className="bg-sky-100 rounded-sm hover:" type="submit" value="Submit Form" ></input> <br></br>
+      </form>
+    </div>
+
         {/*<recipes
         dish="Chicken"
         chef="Gordon"
         inst="blah blah"
         />*/}
-
-    </div>
     
   </div>
   )
