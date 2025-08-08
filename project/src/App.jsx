@@ -1,12 +1,16 @@
-import recipes from './components/recipes.jsx'
+import {HashRouter as Router, Routes, Route } from 'react-router-dom';
 import { useState, useEffect } from 'react'
 import SavorlyLogo from './assets/Savorly.png'
-import Quiz from './Quiz.jsx'
+import Add from './pages/add.jsx'
+import Recipes from './pages/recipes.jsx'
+import Library from './pages/storage.jsx'
+import Home from './pages/home.jsx'
+import { Quiz } from './pages/Quiz.jsx'
 
 
 function App() {
   const [box,setBox]= useState([false, false, false, false, false, false, false])
-  const [checked,isChecked]=useState(false)
+  const [checked,isChecked]=useState()
   const [data, setData] = useState([])
   const [newItem, setNewItem] = useState({ id: '', name: '', description: '', price: '', message: '' })
   const [editingItem, setEditingItem] = useState(null)
@@ -120,52 +124,40 @@ function App() {
     fetchData()
   }, [])
 
-  return (
+  return ( 
   <div>
+      
+        <Routes>
+          <Route path="/" element={<Home/>}/>
+          <Route path="/library" element={<Library/>}/>
+          <Route path="/addRecipes" element={<Add/>}/>
+          <Route path="/quiz" element={<Quiz/>}/>
+        </Routes>
+  
     <div className="flex justify-between bg-slate-400">
         <img className= "h-18 pl-5 "src={SavorlyLogo}/>
           <div className="flex space-x-10 mr-15 py-4"><h3 className=" text-xl" > Home </h3>
+
             <h3 className=" text-xl">  Library </h3>
             <h3 className=" text-xl"> + Add Recipe </h3>
             <h3 className=" text-xl"> Profile </h3>
-            <h3  className=" text-xl"> Quiz </h3>
+
+             <div className="">
+           </div>
+          <Link to="/quiz">
+            <button  className=" text-xl" > Quiz  </button>
+          </Link>
           </div>
-    </div>
     
+    </div>
+     
+    
+  
+  
     <div className="">
       <h1 className="text-3xl content-center">Welcome to Savorly</h1>
       <p>Your Personal Space for Saving and Organizing Recipes</p>
     </div>
-    
-    <div className="text-3xl mx-7 bg-[]">
-      <form>
-        
-        <input className="w-6 h-6" type="checkbox" id="Dairy" checked={isChecked} />
-        <label for="Dairy"> Dairy-Free</label> <br></br> 
-        
-         <input  className="w-5 h-5" type="checkbox" id="Shellfish"/>
-        <label for="Shellfish"> Shellfish</label> <br></br>
-        
-         <input  className="w-5 h-5" type="checkbox" id="Nuts"/>
-        <label for="Nuts"> Nuts</label> <br></br>
-        
-         <input  className="w-5 h-5" type="checkbox" id="Gluten"/>
-        <label for="Gluten"> Gluten-Free</label> <br></br>
-        
-         <input  className="w-5 h-5" type="checkbox" id="Vegetarian"/>
-        <label for="Vegetarian"> Vegetarian</label> <br></br>
-        
-         <input  className="w-5 h-5" type="checkbox" id="Vegan"/>
-        <label for="Vegan"> Vegan</label> <br></br>
-        
-         <input  className="w-5 h-5" type="checkbox" id="Halal"/>
-        <label for="Halal"> Halal</label> <br></br>
-    
-
-        <input className="bg-sky-100 rounded-sm hover:" type="submit" value="Submit Form" ></input> <br></br>
-      </form>
-    </div>
-
         {/*<recipes
         dish="Chicken"
         chef="Gordon"
