@@ -1,11 +1,11 @@
-import {HashRouter as Router, Routes, Route } from 'react-router-dom';
+import { Router, Routes, Route } from 'react-router-dom';
 import { useState, useEffect } from 'react'
 import SavorlyLogo from './assets/Savorly.png'
-import Add from './pages/add.jsx'
 import Recipes from './pages/recipes.jsx'
-import Library from './pages/storage.jsx'
+import Storage from './pages/storage.jsx'
 import Home from './pages/home.jsx'
-import { Quiz } from './pages/Quiz.jsx'
+import Quiz from './pages/quiz.jsx';
+import Navbar from './components/NavBar.jsx';
 
 
 function App() {
@@ -125,18 +125,19 @@ function App() {
   }, [])
 
   return ( 
-  <div>
-      
-        <Routes>
-          <Route path="/" element={<Home/>}/>
-          <Route path="/library" element={<Library/>}/>
-          <Route path="/addRecipes" element={<Add/>}/>
-          <Route path="/quiz" element={<Quiz/>}/>
-        </Routes>
-  
+  <div className="my-0">
+    <Navbar/>
+    <Routes>
+      <Route path="/" element={<Home/>}></Route>
+      <Route path="/quiz" element={<Quiz/>} />
+      <Route path="/library" element={<Storage/>} />
+      <Route path="/recipes" elemnt={<Recipes/>}/>
+    </Routes>
+   {/*} 
     <div className="flex justify-between bg-slate-400">
         <img className= "h-18 pl-5 "src={SavorlyLogo}/>
-          <div className="flex space-x-10 mr-15 py-4"><h3 className=" text-xl" > Home </h3>
+          <div className="flex space-x-10 mr-15 py-4">
+          <h3 className=" text-xl" > Home </h3>
 
             <h3 className=" text-xl">  Library </h3>
             <h3 className=" text-xl"> + Add Recipe </h3>
@@ -144,20 +145,13 @@ function App() {
 
              <div className="">
            </div>
-          <Link to="/quiz">
-            <button  className=" text-xl" > Quiz  </button>
-          </Link>
           </div>
     
     </div>
-     
-    
+    */}
+
   
-  
-    <div className="">
-      <h1 className="text-3xl content-center">Welcome to Savorly</h1>
-      <p>Your Personal Space for Saving and Organizing Recipes</p>
-    </div>
+   
         {/*<recipes
         dish="Chicken"
         chef="Gordon"

@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react'
 
 
-function recipes(props){
+export default function recipes(){
    const [rest,setRest]= useState([])
      const [data, setData] = useState([])
-     const [newItem, setNewItem] = useState({ id: '', chef: '', dish: '', inst: '', type: '' })
+     const [newItem, setNewItem] = useState({ id: '', chef: '', dish: '', inst: '', img: '' })
      const [editingItem, setEditingItem] = useState(null)
      // Use RAILWAY_API_URL environment variable for Railway deployment  
      const API_URL = import.meta.env.VITE_RAILWAY_API_URL || 'http://localhost:3001'
@@ -119,4 +119,3 @@ function recipes(props){
         </div>
     )
 }
-export default recipes

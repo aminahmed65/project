@@ -1,8 +1,11 @@
 import { useState } from "react"
-export function home(){
+export default function home(){
     return(
         <div>
-            <h1>Your in the Home Page</h1> 
+             <div className="">
+                 <h1 className="text-3xl content-center">Welcome to Savorly</h1>
+                 <p>Your Personal Space for Saving and Organizing Recipes</p>
+    </div>
         </div>
     )
 }
