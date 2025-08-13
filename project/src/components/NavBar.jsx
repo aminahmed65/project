@@ -21,7 +21,7 @@ const Navbar=()=>{
                     </div>
 
                     <div className="flex items-center justify-center border-2 w-25 h-8 rounded-xl ">
-                     <Link to="/storage">
+                     <Link to="/library">
                         Library
                     </Link>
                     </div>

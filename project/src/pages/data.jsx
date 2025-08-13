@@ -3,14 +3,24 @@ import { RxTimer } from "react-icons/rx";
 import watch from "../assets/watch.png"
 
 
-export default function Data(prop){
+export default function data(prop){
    const [rest,setRest]= useState([])
      const [data, setData] = useState([])
-     const [newItem, setNewItem] = useState({ id: '', chef: '', dish: '', inst: '', pic: '', saved: false, cat1:'' , cat2:''  })
+     const [newItem, setNewItem] = useState({ id: '', chef: '', dish: '', inst: '', pic: '', saved: false , cat1:'' , cat2:''  })
      const [editingItem, setEditingItem] = useState(null)
+     const [pop,setPop]=useState(false)
+
+
      // Use RAILWAY_API_URL environment variable for Railway deployment  
      const API_URL = import.meta.env.VITE_RAILWAY_API_URL || 'http://localhost:3001'
    
+    function popUp(){
+      const togglePopup = () => {
+      setIsOpen(pop => !pop);
+  };
+    }
+     
+     
      // CRUD Operations - HTTP Requests:
      
      // READ: Fetch all data items (HTTP GET)
@@ -74,7 +84,7 @@ export default function Data(prop){
        event.preventDefault()
        
        // Validate all fields are filled
-       if (!editingItem.chef.trim() || !editingItem.dish.trim() || !editingItem.inst.trim() || !editingItem.pic.trim() || !editingItem.saved.trim() || !editingItem.cat1.trim() || !editingItem.cat2.trim()) {
+       if (!editingItem.chef.trim() || !editingItem.dish.trim() || !editingItem.inst.trim() || !editingItem.pic.trim() || !editingItem.cat1.trim() || !editingItem.cat2.trim()) {
          alert('Please fill in all fields before saving.')
          return
        }
@@ -95,6 +105,39 @@ export default function Data(prop){
          console.error('Error updating item:', error)
        }
      }
+
+   const toggleSaved = async (item) => {
+  try {
+    const updatedItem = {
+      ...item,
+      saved: !item.saved
+    };
+
+    const response = await fetch(`${API_URL}/api/data/${item.id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        data: {
+          chef: updatedItem.chef,
+          dish: updatedItem.dish,
+          inst: updatedItem.inst,
+          pic: updatedItem.pic,
+          saved: updatedItem.saved,
+          cat1: updatedItem.cat1,
+          cat2: updatedItem.cat2
+        }
+      })
+    });
+
+    if (response.ok) {
+      fetchData(); // Refresh data to show updated favorite status
+    } else {
+      console.error('Failed to toggle favorite');
+    }
+  } catch (error) {
+    console.error('Error toggling favorite:', error);
+  }
+};
    
      // DELETE: Remove data item (HTTP DELETE)
      // DELETE /api/data/:id - Deletes an item by ID from the database
@@ -114,9 +157,12 @@ export default function Data(prop){
      useEffect(() => {
        fetchData()
      }, [])
+     
     return(
-       <div className="space-y-3">
+  <div className="">
+       <div className="space-y-3 hidden">
        <h1>Adding pre-built Recipes to the database</h1>
+       <input type="text" placeholder='search bar' className=''></input>
        <form onSubmit={createItem}>
         <div className="">
             <input
@@ -151,7 +197,7 @@ export default function Data(prop){
           </div>
 
           <div className="">
-            <input 
+            <textarea 
               type="text"
               placeholder="Instructions"
               value={newItem.inst}
@@ -171,6 +217,15 @@ export default function Data(prop){
               required
             />
           </div>
+
+           <label for="Saved"> Save </label>
+           <input 
+            type="checkbox"
+            id="Saved" 
+            name="butt"
+            checked={newItem.saved === true}
+            onChange={(event) => setNewItem({ ...newItem, saved: event.target.checked })}
+/>
 
           <div className="">
            <label for="Savory"> Savory </label>
@@ -223,10 +278,10 @@ export default function Data(prop){
             onChange={(event) => setNewItem({ ...newItem, cat2: event.target.value })}
             />
           
-           <label for="Turkish"> Turkish </label>
-           <input type="radio" id="Turkish" name="rad2"
-            value="Turkish"
-            checked={newItem.cat2==="Turkish"}
+           <label for="Mexican"> Mexican </label>
+           <input type="radio" id="Mexican" name="rad2"
+            value="Mexican"
+            checked={newItem.cat2==="Mexican"}
             onChange={(event) => setNewItem({ ...newItem, cat2: event.target.value })}
             />
 
@@ -252,7 +307,101 @@ export default function Data(prop){
           </div>
         </div>
       </form>
+</div>
+ {/* Edit Item Form */}
+      {editingItem && (
+        <div className="bg-gradient-to-br from-amber-50 to-orange-100 p-6 rounded-xl mb-8 shadow-lg border border-amber-200">
+          <h2 className="text-2xl font-semibold mb-6 text-gray-800">
+            Edit Item
+          </h2>
+          <form onSubmit={updateItem} className="space-y-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <textarea
+                type="text"
+                placeholder="Instructions"
+                value={editingItem.inst}
+                onChange={(event) => setEditingItem({...editingItem, inst: event.target.value})}
+                className="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-all duration-200"
+                required
+              />
+            </div>
+          
+            <div className="flex gap-4 mt-6">
+              <button type="submit" className="px-8 py-3 bg-gradient-to-r from-green-500 to-green-600 text-white font-semibold rounded-lg hover:from-green-600 hover:to-green-700 transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl">
+                Update Item
+              </button>
+              <button 
+                type="button" 
+                onClick={() => setEditingItem(null)}
+                className="px-8 py-3 bg-gradient-to-r from-gray-500 to-gray-600 text-white font-semibold rounded-lg hover:from-gray-600 hover:to-gray-700 transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl"
+              >
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
+      )}
 
+      {/* Data List */}
+      <div className="">
+        <div className="">
+          <h2 className="text-2xl font-semibold text-gray-800">
+            Recipes
+          </h2>
+        </div>
+        {data.length === 0 ? (
+          <div className="p-12 text-center">
+            <p className="text-xl text-gray-500 mb-2">No data yet!</p>
+            <p className="text-gray-400">Add some items to get started</p>
+          </div>
+        ) : (
+          <div className="flex space-x-10">
+            {data.map(item => (
+              <div key={item.id} className="w-60 h-85 border-3 rounded-t-lg flex items-center justify-center border-[#7A8450]">
+                <div className="">
+                  <div className="">
+                    <div className="border-0 rounded-t-xl">
+                       <img className="h-56.5 w-60 bg-cover rounded-t-lg border-[#7A8450]" src={item.data.pic}/>
+                    </div>
+                    <h3 className="text-xl font-thin flex items-center justify-center">{item.data.dish}</h3>
+                    {/*<p className="  flex items-center justify-center text-gray-600 mb-2">Chef: {item.data.chef}</p>*/}
+                    <div className="flex space-x-5 font-normal ">
+                    <p className=" flex items-center justify-center mb-2 border-1 border-[#7A8450] h-9 w-20 rounded-full space-y-2">{item.data.cat1}</p>
+                    <p className=" flex items-center justify-center mb-2 border-1 border-[#7A8450] h-9 w-20 rounded-full space-y-2">{item.data.cat2}</p>
+                    </div>
+                    <div className="">
+                      <p className="text-xl font-bold">{item.data.saved}</p>
+                    </div>
+                  </div>
+                  
+
+                  <div className="flex gap-3 ml-4">
+                    <button
+                      onClick={() => setEditingItem({id: item.id, ...item.data})}
+                      className="px-4 py-2 bg-gradient-to-r from-amber-500 to-yellow-500 text-white font-semibold rounded-lg hover:from-amber-600 hover:to-yellow-600 transform hover:scale-105 transition-all duration-200 shadow-md hover:shadow-lg"
+                    >
+                      Edit
+                    </button>
+
+                    <button
+                        onClick={() => toggleSaved({ id: item.id, ...item.data })}
+                        className={`px-4 py-2 font-semibold rounded-lg transform hover:scale-105 transition-all duration-200 shadow-md hover:shadow-lg ${
+                        item.data.saved
+                         ? 'bg-red-500 text-white hover:bg-red-600'
+                           : 'bg-green-500 text-white hover:bg-green-600'
+                        }`}
+                        >
+                      {item.data.saved ? 'Unsave' : 'Saved'}
+                      </button>
+
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+      
 
 
 

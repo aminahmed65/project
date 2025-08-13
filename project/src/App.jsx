@@ -6,8 +6,9 @@ import Storage from './pages/storage.jsx'
 import Home from './pages/home.jsx'
 import Quiz from './pages/quiz.jsx';
 import Navbar from './components/NavBar.jsx';
-import Data from './components/data.jsx';
-import Add from './pages/addRecipe.jsx';
+import Data from './pages/data.jsx';
+import Library from './pages/lib.jsx';
+
 
 
 function App() {
@@ -132,10 +133,10 @@ function App() {
     <Routes>
       <Route path="/" element={<Home/>}></Route>
       <Route path="/quiz" element={<Quiz/>} />
-      <Route path="/library" element={<Storage/>} />
+      <Route path="/library" element={<Library/>} />
       <Route path="/recipes" elemnt={<Recipes/>}/>
       <Route path="/backdata" element={<Data/>}/>
-      <Route path="/addrecipes" element={<Add/>}/>
+      <Route path="/addrecipes" element={<Data/>}/>
     </Routes>
    {/*} 
     <div className="flex justify-between bg-slate-400">
