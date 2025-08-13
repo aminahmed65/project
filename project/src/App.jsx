@@ -7,6 +7,7 @@ import Home from './pages/home.jsx'
 import Quiz from './pages/quiz.jsx';
 import Navbar from './components/NavBar.jsx';
 import Data from './components/data.jsx';
+import Add from './pages/addRecipe.jsx';
 
 
 function App() {
@@ -134,6 +135,7 @@ function App() {
       <Route path="/library" element={<Storage/>} />
       <Route path="/recipes" elemnt={<Recipes/>}/>
       <Route path="/backdata" element={<Data/>}/>
+      <Route path="/addrecipes" element={<Add/>}/>
     </Routes>
    {/*} 
     <div className="flex justify-between bg-slate-400">

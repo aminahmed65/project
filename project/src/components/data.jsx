@@ -151,12 +151,12 @@ export default function Data(prop){
           </div>
 
           <div className="">
-            <input
+            <input 
               type="text"
               placeholder="Instructions"
               value={newItem.inst}
               onChange={(event) => setNewItem({...newItem, inst: event.target.value})}
-              className="px-4 py-3 border border-gray-300 rounded-lg"
+              className="px-4 py-3 border border-gray-300 rounded-lg h-40"
               required
             />
           </div>

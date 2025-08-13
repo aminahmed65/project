@@ -3,6 +3,7 @@ import Recipes from "./recipes.jsx"
 import { FaPlus } from "react-icons/fa";
 
 export default function home(){
+    
     return(
         <div className="ml-20 flex ">
         <div id="left_side">
@@ -37,16 +38,16 @@ export default function home(){
             </div>
             <div id="right_side">
           
-            <div className=" mx-50 my-7 opacity-50 bg-[url(https://i.pinimg.com/236x/a6/52/09/a6520976318224586e108920e946b30f.jpg)] bg-cover h-140 w-90 border-2">
-                <h1 className="text-2xl font-semibold mx-17 mt-5">Your Saved Recipes</h1>
-                    <div className="bg-grey-300 h-110 w-65 border-1 mx-12 my-10">
+            <div className=" mx-50 my-7  bg-[#7A8450] h-140 w-90 border-2">
+                <h1 className="text-2xl font-semibold mx-17 mt-5">Recipe Of The Day</h1>
+                    <div className="bg-[#D9D9D9B2] h-110 w-65 border-1 mx-12 my-10">
                          <img className="h-53 w-47 mx-10 mt-10 mb-5 opacity-100" src="https://www.cookingforkeeps.com/wp-content/uploads/2018/02/Shrimp-Alfredo-5-Ingredients-3-1.jpg.webp"/>
                          <button className="mx-23 my-5 h-10 w-26 bg-gray-200 rounded-full border-1">Ingredients</button><br></br>
                          <button className="mx-23 h-10 w-26 bg-gray-200 rounded-full border-1">Rating</button>
                     </div>
             </div>
             <button type="button" className="ml-45 h-15 w-100 bg-gray-200 mb-5 rounded-full">+ Add Recipes</button>
-            <button type="button" className="ml-45 h-15 w-100 bg-gray-200 rounded-full"> Import Recipes</button>
+            <button type="button"  className="ml-45 h-15 w-100 bg-gray-200 rounded-full"> Import Recipes</button>
         </div>
             
          </div>

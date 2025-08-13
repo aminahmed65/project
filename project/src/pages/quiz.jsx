@@ -4,7 +4,7 @@ function Quiz(){
     
     <div className="h-screen bg-[#AEBD93] place-items-center font-serif ">
       <div className="mt-0">
-          <div className="bg-white h-160 w-150 place-items-center mt-0 rounded-xl ">
+          <div className="bg-white h-160 w-100 place-items-center mt-0 rounded-xl ">
             <form className="text-2xl space-y-8 m-8 place-items-center rounded-sm  ">
                <h1 className="text-4xl mt-4 m mx-4  ">Dietary Restriction Section </h1>
                 <h1 className="ml-0 italic font-light">Please select all that apply</h1>
@@ -34,7 +34,12 @@ function Quiz(){
               </div>
             </form>
             </div>
+
           </div>
+        {/*}  <div className="h-screen w-bg-[url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScFpNHUtJt7bRoLguodbD-0OEXok6q1lp5dCnfElhzu32jbvcF)] bg-cover">
+
+          </div>
+          */}
     </div>
     )
 }
