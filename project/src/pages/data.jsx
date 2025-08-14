@@ -8,7 +8,8 @@ export default function data(prop){
      const [data, setData] = useState([])
      const [newItem, setNewItem] = useState({ id: '', chef: '', dish: '', inst: '', pic: '', saved: false , cat1:'' , cat2:''  })
      const [editingItem, setEditingItem] = useState(null)
-     const [pop,setPop]=useState(false)
+     const [viewedRecipe, setViewedRecipe] = useState(null);
+     
 
 
      // Use RAILWAY_API_URL environment variable for Railway deployment  
@@ -18,6 +19,10 @@ export default function data(prop){
       const togglePopup = () => {
       setIsOpen(pop => !pop);
   };
+    }
+
+    function openRecipe(){
+      setView(view=>!view)
     }
      
      
@@ -343,13 +348,14 @@ export default function data(prop){
       )}
 
       {/* Data List */}
+    <div>
       <div className="">
         <div className="">
           <h2 className="text-2xl font-semibold text-gray-800">
             Recipes
           </h2>
-        </div>
-        {data.length === 0 ? (
+         </div>
+         {data.length === 0 ? (
           <div className="p-12 text-center">
             <p className="text-xl text-gray-500 mb-2">No data yet!</p>
             <p className="text-gray-400">Add some items to get started</p>
@@ -375,37 +381,51 @@ export default function data(prop){
                   </div>
                   
 
-                  <div className="flex gap-3 ml-4">
-                    <button
-                      onClick={() => setEditingItem({id: item.id, ...item.data})}
-                      className="px-4 py-2 bg-gradient-to-r from-amber-500 to-yellow-500 text-white font-semibold rounded-lg hover:from-amber-600 hover:to-yellow-600 transform hover:scale-105 transition-all duration-200 shadow-md hover:shadow-lg"
-                    >
-                      Edit
+                  <div className="ml-5 flex gap-10 ">
+
+                    <button className="h-10 w-13 tx-lg border-1 rounded-lg" onClick={() => setViewedRecipe(item)} >
+                    View
                     </button>
+
 
                     <button
                         onClick={() => toggleSaved({ id: item.id, ...item.data })}
                         className={`px-4 py-2 font-semibold rounded-lg transform hover:scale-105 transition-all duration-200 shadow-md hover:shadow-lg ${
                         item.data.saved
-                         ? 'bg-red-500 text-white hover:bg-red-600'
-                           : 'bg-green-500 text-white hover:bg-green-600'
+                         ?   'hover:bscale-80'
+                           : 'hover:120'
                         }`}
                         >
-                      {item.data.saved ? 'Unsave' : 'Saved'}
+                      {item.data.saved ? <img  className=" h-7 w-7"src="https://static.vecteezy.com/system/resources/previews/018/868/329/non_2x/red-heart-symbol-on-transparent-background-free-png.png"/>: <img className="h-7 w-7 " src="https://www.iconpacks.net/icons/2/free-heart-icon-3510-thumb.png"/>}
                       </button>
-
                   </div>
+                  
                 </div>
               </div>
             ))}
           </div>
         )}
+    {viewedRecipe && (
+  <div className="fixed inset-0 z-50 overflow-y-auto bg-black bg-opacity-50 flex justify-center items-start pt-20 px-4">
+    <div className="bg-white rounded-lg p-6 w-full max-w-2xl shadow-lg relative">
+      <button
+        onClick={() => setViewedRecipe(null)}
+        className="absolute top-4 right-4 text-gray-600 hover:text-black text-2xl font-bold"
+      >
+        &times;
+      </button>
+      <h2 className="text-2xl font-semibold mb-4">{viewedRecipe.data.dish}</h2>
+      <p className="text-gray-700 whitespace-pre-wrap">
+        {viewedRecipe.data.inst}
+      </p>
+    </div>
+  </div>
+)}
       </div>
-      
-
-
-
-        
-       </div>
+    </div>
+    <div>
+      <input type="text" id="import" ></input>
+    </div>
+    </div>
     )
 }

@@ -2,12 +2,12 @@ import { Router, Routes, Route } from 'react-router-dom';
 import { useState, useEffect } from 'react'
 import SavorlyLogo from './assets/Savorly.png'
 import Recipes from './pages/recipes.jsx'
-import Storage from './pages/storage.jsx'
 import Home from './pages/home.jsx'
 import Quiz from './pages/quiz.jsx';
 import Navbar from './components/NavBar.jsx';
 import Data from './pages/data.jsx';
-import Library from './pages/lib.jsx';
+import Library from './pages/library.jsx';
+
 
 
 
@@ -133,10 +133,10 @@ function App() {
     <Routes>
       <Route path="/" element={<Home/>}></Route>
       <Route path="/quiz" element={<Quiz/>} />
-      <Route path="/library" element={<Library/>} />
       <Route path="/recipes" elemnt={<Recipes/>}/>
       <Route path="/backdata" element={<Data/>}/>
       <Route path="/addrecipes" element={<Data/>}/>
+      <Route path="/library" element={<Library/>}/>
     </Routes>
    {/*} 
     <div className="flex justify-between bg-slate-400">

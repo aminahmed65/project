@@ -26,6 +26,7 @@ const Navbar=()=>{
                     </Link>
                     </div>
 
+
                      <div className="flex items-center justify-center border-2 w-40 h-8 rounded-xl ">
                      <Link to="/addrecipes">
                         Add Recipe+
