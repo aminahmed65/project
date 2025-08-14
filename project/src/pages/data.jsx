@@ -348,9 +348,9 @@ export default function data(prop){
       )}
 
       {/* Data List */}
-    <div>
+    <div className="">
       <div className="">
-        <div className="">
+        <div className="mb-10">
           <h2 className="text-2xl font-semibold text-gray-800">
             Recipes
           </h2>
@@ -361,7 +361,7 @@ export default function data(prop){
             <p className="text-gray-400">Add some items to get started</p>
           </div>
         ) : (
-          <div className="flex space-x-10">
+          <div className=" grid grid-cols-3 gap-x-1 gap-y-4">
             {data.map(item => (
               <div key={item.id} className="w-60 h-85 border-3 rounded-t-lg flex items-center justify-center border-[#7A8450]">
                 <div className="">
@@ -371,7 +371,7 @@ export default function data(prop){
                     </div>
                     <h3 className="text-xl font-thin flex items-center justify-center">{item.data.dish}</h3>
                     {/*<p className="  flex items-center justify-center text-gray-600 mb-2">Chef: {item.data.chef}</p>*/}
-                    <div className="flex space-x-5 font-normal ">
+                    <div className="flex space-x-5 font-normal ml-2 ">
                     <p className=" flex items-center justify-center mb-2 border-1 border-[#7A8450] h-9 w-20 rounded-full space-y-2">{item.data.cat1}</p>
                     <p className=" flex items-center justify-center mb-2 border-1 border-[#7A8450] h-9 w-20 rounded-full space-y-2">{item.data.cat2}</p>
                     </div>

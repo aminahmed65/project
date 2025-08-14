@@ -68,20 +68,20 @@ export default function Library() {
 
   return (
     <div className="p-6">
-      <h2 className="text-3xl font-bold mb-4">Saved Recipes</h2>
+      <h2 className="text-3xl font-bold mb-10">Saved Recipes</h2>
       {savedRecipes.length === 0 ? (
         <p>No saved recipes yet.</p>
       ) : (
-        <div className="flex justify space-x-10">
+        <div className=" grid grid-cols-3 gap-x-1 gap-y-4">
           {savedRecipes.map(item => (
-            <div key={item.id} className="border rounded-lg p-4 shadow">
-              <img src={item.data.pic} className="h-45 w-45" alt={item.data.dish} />
-              <h3 className="text-xl font-semibold mt-2">{item.data.dish}</h3>
+            <div key={item.id} className=" w-60 border rounded-lg p-4 shadow content-center">
+              <img src={item.data.pic} className="flex justify-center h-50 w-50" alt={item.data.dish} />
+              <h3 className="flex justify-center  text-xl font-semibold mt-2">{item.data.dish}</h3>
               <p className="text-sm text-gray-600">{item.data.chef}</p>
-               <div className="flex gap-3 ml-4">
+               <div className=" flex justify-center gap-3 ml-4">
                     <button
                       onClick={() => setEditingItem({id: item.id, ...item.data})}
-                      className="px-4 py-2 bg-gradient-to-r from-amber-500 to-yellow-500 text-white font-semibold rounded-lg hover:from-amber-600 hover:to-yellow-600 transform hover:scale-105 transition-all duration-200 shadow-md hover:shadow-lg"
+                      className=" h-10 w-13 tx-lg border-1 rounded-lg"
                     >
                       Edit
                     </button>
